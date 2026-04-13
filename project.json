@@ -1,0 +1,23 @@
+{
+  "overview": "Hook Sniffer is an AI-powered anti-phishing cybersecurity app with dark mode UI, real-time email threat detection, QR/URL scanning, and immediate threat alert modals. It features a 5-tab bottom navigation covering Home/Dashboard, Threat Scanner, Global Map, Analytics, and Profile with email linking.",
+  "features": [
+    "Secure login with Internet Identity",
+    "Threat alert modal with phishing detection",
+    "Home dashboard with security score and live monitor status",
+    "URL, QR code, and email threat scanner",
+    "Email account linking in Profile",
+    "Zustand state management for real-time alert updates",
+    "Protection settings with toggle switches",
+    "Dark mode with neon green cybersecurity aesthetic"
+  ],
+  "category": "productivity",
+  "tags": [
+    "cybersecurity",
+    "anti-phishing",
+    "dark-mode",
+    "threat-detection",
+    "email-security",
+    "qr-scanner"
+  ],
+  "last_updated": "2026-04-13T19:56:12.554Z"
+}

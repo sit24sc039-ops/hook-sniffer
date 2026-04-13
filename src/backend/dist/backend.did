@@ -1,0 +1,92 @@
+type ThreatType = 
+ variant {
+   malware;
+   phishing;
+   spam;
+ };
+type ThreatSource = 
+ variant {
+   email;
+   qr;
+   sms;
+   url;
+ };
+type ThreatAlertPublic = 
+ record {
+   id: nat;
+   isRead: bool;
+   riskScore: nat;
+   source: ThreatSource;
+   threatName: text;
+   threatType: ThreatType;
+   timestamp: int;
+   url: text;
+ };
+type Stats = 
+ record {
+   totalBlocked: nat;
+   totalScanned: nat;
+   totalWarnings: nat;
+ };
+type ScanType = 
+ variant {
+   email;
+   qr;
+   url;
+ };
+type ScanResult = 
+ variant {
+   malware;
+   phishing;
+   safe;
+   spam;
+ };
+type ScanEntry = 
+ record {
+   confidence: nat;
+   id: nat;
+   result: ScanResult;
+   scanType: ScanType;
+   timestamp: int;
+   url: text;
+ };
+type ProtectionSettingsPublic = 
+ record {
+   aiIntel: bool;
+   browserProtection: bool;
+   emailProtection: bool;
+   silentScan: bool;
+   smsProtection: bool;
+ };
+type LinkedPhonePublic = 
+ record {
+   isLinked: bool;
+   phoneNumber: text;
+ };
+type LinkedEmailPublic = 
+ record {
+   emailAddress: text;
+   isLinked: bool;
+   provider: text;
+ };
+service : {
+  getAlerts: () -> (vec ThreatAlertPublic) query;
+  getLinkedEmail: () -> (LinkedEmailPublic) query;
+  getLinkedPhone: () -> (LinkedPhonePublic) query;
+  getProtectionSettings: () -> (ProtectionSettingsPublic) query;
+  getScanHistory: () -> (vec ScanEntry) query;
+  getSecurityScore: () -> (nat) query;
+  getStats: () -> (Stats) query;
+  getUnreadAlertsCount: () -> (nat) query;
+  linkEmail: (provider: text, emailAddress: text) -> ();
+  linkPhone: (phoneNumber: text) -> ();
+  markAlertRead: (id: nat) -> ();
+  markAllAlertsRead: () -> ();
+  scanEmail: (url: text) -> (ScanEntry);
+  scanQr: (url: text) -> (ScanEntry);
+  scanUrl: (url: text) -> (ScanEntry);
+  simulateEmailThreat: (url: text, threatName: text) -> (ThreatAlertPublic);
+  unlinkEmail: () -> ();
+  unlinkPhone: () -> ();
+  updateProtectionSettings: (updated: ProtectionSettingsPublic) -> ();
+}

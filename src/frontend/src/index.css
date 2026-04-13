@@ -1,0 +1,308 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "General Sans", sans-serif;
+    --font-body: "DM Sans", sans-serif;
+    --font-mono: "Geist Mono", monospace;
+    --radius: 0.25rem;
+
+    --background: 0.99 0 0;
+    --foreground: 0.15 0 0;
+    --card: 1.0 0 0;
+    --card-foreground: 0.15 0 0;
+    --popover: 1.0 0 0;
+    --popover-foreground: 0.15 0 0;
+
+    --primary: 0.72 0.28 145;
+    --primary-foreground: 0.145 0 0;
+
+    --secondary: 0.95 0 0;
+    --secondary-foreground: 0.25 0 0;
+    --muted: 0.95 0 0;
+    --muted-foreground: 0.5 0 0;
+
+    --accent: 0.72 0.28 145;
+    --accent-foreground: 0.145 0 0;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.9 0 0;
+    --input: 0.9 0 0;
+    --ring: 0.72 0.28 145;
+
+    --chart-1: 0.65 0.22 40;
+    --chart-2: 0.6 0.12 185;
+    --chart-3: 0.4 0.07 227;
+    --chart-4: 0.83 0.19 84;
+    --chart-5: 0.77 0.19 70;
+
+    --sidebar: 0.98 0 0;
+    --sidebar-foreground: 0.15 0 0;
+    --sidebar-primary: 0.72 0.28 145;
+    --sidebar-primary-foreground: 0.145 0 0;
+    --sidebar-accent: 0.95 0 0;
+    --sidebar-accent-foreground: 0.25 0 0;
+    --sidebar-border: 0.9 0 0;
+    --sidebar-ring: 0.72 0.28 145;
+  }
+
+  .dark {
+    /* Deep black background — tactical cybersecurity aesthetic */
+    --background: 0.08 0 0;
+    --foreground: 0.93 0 0;
+    --card: 0.12 0 0;
+    --card-foreground: 0.93 0 0;
+    --popover: 0.14 0 0;
+    --popover-foreground: 0.93 0 0;
+
+    /* Neon cyber green — primary accent */
+    --primary: 0.72 0.28 145;
+    --primary-foreground: 0.06 0 0;
+
+    --secondary: 0.16 0 0;
+    --secondary-foreground: 0.82 0 0;
+    --muted: 0.16 0 0;
+    --muted-foreground: 0.5 0 0;
+
+    /* Accent = neon green */
+    --accent: 0.72 0.28 145;
+    --accent-foreground: 0.06 0 0;
+
+    --destructive: 0.62 0.22 22;
+    --destructive-foreground: 0.95 0 0;
+
+    --border: 0.22 0 0;
+    --input: 0.2 0 0;
+    --ring: 0.72 0.28 145;
+
+    --chart-1: 0.72 0.28 145;
+    --chart-2: 0.62 0.22 22;
+    --chart-3: 0.6 0.18 264;
+    --chart-4: 0.75 0.18 85;
+    --chart-5: 0.55 0.2 200;
+
+    --sidebar: 0.1 0 0;
+    --sidebar-foreground: 0.93 0 0;
+    --sidebar-primary: 0.72 0.28 145;
+    --sidebar-primary-foreground: 0.06 0 0;
+    --sidebar-accent: 0.16 0 0;
+    --sidebar-accent-foreground: 0.82 0 0;
+    --sidebar-border: 0.22 0 0;
+    --sidebar-ring: 0.72 0.28 145;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer utilities {
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Neon green border — use direct CSS value to avoid circular @apply dependency */
+  .border-neon {
+    border-color: oklch(0.72 0.28 145);
+  }
+
+  .bg-alert {
+    background-color: oklch(0.62 0.22 22 / 0.1);
+  }
+
+  .text-threat {
+    color: oklch(0.72 0.28 145);
+    font-family: var(--font-mono);
+    font-weight: 600;
+  }
+
+  /* Neon scan ring glow */
+  .shadow-scan-ring {
+    box-shadow: 0 0 0 2px oklch(0.72 0.28 145 / 0.3), inset 0 0 0 1px
+      oklch(0.72 0.28 145 / 0.2);
+  }
+
+  /* Threat danger glow */
+  .shadow-threat-glow {
+    box-shadow: 0 0 20px oklch(0.72 0.28 145 / 0.25), 0 0 0 1px
+      oklch(0.72 0.28 145 / 0.5);
+  }
+
+  /* Red threat danger glow */
+  .shadow-danger-glow {
+    box-shadow: 0 0 20px oklch(0.62 0.22 22 / 0.4), 0 0 0 1px
+      oklch(0.62 0.22 22 / 0.5);
+  }
+
+  /* Tactical card with left neon border accent */
+  .card-threat {
+    border-left: 3px solid oklch(0.72 0.28 145);
+    background-color: oklch(0.12 0 0);
+  }
+
+  /* Status indicator — active green dot */
+  .dot-active {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: oklch(0.72 0.28 145);
+    box-shadow: 0 0 6px oklch(0.72 0.28 145 / 0.8);
+  }
+
+  /* Radar sweep animation */
+  .radar-sweep {
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      oklch(0.72 0.28 145 / 0.4) 30deg,
+      oklch(0.72 0.28 145 / 0.0) 60deg,
+      transparent 360deg
+    );
+  }
+}
+
+/* Radar animation */
+@keyframes radar-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes threat-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(0.72 0.28 145 / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 8px oklch(0.72 0.28 145 / 0);
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes neon-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  93% {
+    opacity: 0.7;
+  }
+  94% {
+    opacity: 1;
+  }
+  96% {
+    opacity: 0.8;
+  }
+  97% {
+    opacity: 1;
+  }
+}
+
+.animate-radar-rotate {
+  animation: radar-rotate 3s linear infinite;
+}
+
+.animate-threat-pulse {
+  animation: threat-pulse 2s ease-in-out infinite;
+}
+
+.animate-modal-in {
+  animation: modal-in 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-backdrop-in {
+  animation: backdrop-in 0.15s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out forwards;
+}
+
+.animate-neon-flicker {
+  animation: neon-flicker 4s ease-in-out infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-radar-rotate,
+  .animate-threat-pulse,
+  .animate-neon-flicker,
+  .animate-scan-pulse,
+  .animate-shield-bounce {
+    animation: none;
+  }
+
+  .transition-smooth,
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}

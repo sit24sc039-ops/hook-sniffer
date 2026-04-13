@@ -1,0 +1,59 @@
+// Version: 1.0.0
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type ScanEntry__667354443 =
+  {
+    confidence : Nat;
+    id : Nat;
+    result : ScanResult__737782722;
+    scanType : ScanType__399224987;
+    timestamp : Int;
+    url : Text
+  };
+type ScanResult__737782722 = {#malware; #phishing; #safe; #spam};
+type ScanType__399224987 = {#email; #qr; #url};
+type ThreatAlert__625368048 =
+  {
+    id : Nat;
+    var isRead : Bool;
+    riskScore : Nat;
+    source : ThreatSource__626243472;
+    threatName : Text;
+    threatType : ThreatType__496343916;
+    timestamp : Int;
+    url : Text
+  };
+type ThreatSource__626243472 = {#email; #qr; #sms; #url};
+type ThreatType__496343916 = {#malware; #phishing; #spam};
+actor {
+  stable _alertSeedEnd : Nat;
+  stable _alerts :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ThreatAlert__625368048]];
+      var elementIndex : Nat__490723111
+    };
+  stable _linkedEmail :
+    {var emailAddress : Text; var isLinked : Bool; var provider : Text};
+  stable _linkedPhone : {var isLinked : Bool; var phoneNumber : Text};
+  stable _nextAlertId : {var val : Nat};
+  stable _nextScanId : {var val : Nat};
+  stable _scanHistory :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?ScanEntry__667354443]];
+      var elementIndex : Nat__490723111
+    };
+  stable _scanSeedEnd : Nat;
+  stable _settings :
+    {
+      var aiIntel : Bool;
+      var browserProtection : Bool;
+      var emailProtection : Bool;
+      var silentScan : Bool;
+      var smsProtection : Bool
+    };
+  stable _totalBlocked : {var val : Nat};
+  stable _totalScanned : {var val : Nat};
+  stable _totalWarnings : {var val : Nat}
+};
